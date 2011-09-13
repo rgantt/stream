@@ -2,8 +2,8 @@
 class Stream implements Iterator {
 	private $tailPromise;
 	private $headValue;
-    private $pointer;
-    private $pointerIndex;
+	private $pointer;
+	private $pointerIndex;
 
 	public function __construct( $head = null, $tailPromise = null ) {
 		if( $tailPromise === null ) {
