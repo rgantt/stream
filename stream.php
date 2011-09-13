@@ -1,5 +1,7 @@
 <?php
 class Stream implements Iterator {
+	private $tailPromise;
+	private $headValue;
     private $pointer;
     private $pointerIndex;
 
@@ -68,13 +70,13 @@ class Stream implements Iterator {
 			try {
 				$s = $s->tail();
 			} catch( Exception $e ) {
-				throw new Exception('Index $n does not exist in the stream');
+				throw new Exception("Index {$n} does not exist in the stream");
 			}
 		}
 		try {
 			return $s->head();
 		} catch( Exception $e ) {
-			throw new Exception('Index $n does not exist in the stream.');
+			throw new Exception("Index {$n} does not exist in the stream.");
 		}
 	}
 	
@@ -207,18 +209,26 @@ class Stream implements Iterator {
 		return '[strema head: ' . $this->head() . '; tail: ' . $this->tail() . ']';
 	}
 	
-    public function out( $n = null ) {
-		$target;
-        if ( $n !== null ) {
-            $target = $this->take( $n );
-        } else {
-            // requires finite stream
-            $target = $this;
-        }
-        $target->walk( function( $x ) {
-            echo $x."\n";
-        });
-    }
+	/**
+	 * accepts a second parameter, $f, that is a callback
+	 * to be applied during the array walk
+	 */
+	public function out( $n = null, $f = null ) {
+		$target = null;
+		if ( $n !== null ) {
+			$target = $this->take( $n );
+		} else {
+			// requires finite stream
+			$target = $this;
+		}
+		$target->walk( function( $x ) use ( $f ) {
+			if( is_callable( $f ) ) {
+				$f( $x );
+			} else {
+				echo $x."\n";
+			}
+		});
+	}
 	
 	static
 	
