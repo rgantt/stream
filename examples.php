@@ -172,4 +172,7 @@ function sieve( $s ) {
 	});
 }
 
-sieve( Stream::range( 2 ) )->take( 10 )->out();  
+$primes = sieve( Stream::range( 2 ) )->take( 10 ); // ->out();  
+foreach ( $primes as $prime ) {
+    echo $prime . "\n";
+}

@@ -1,5 +1,8 @@
 <?php
-class Stream {
+class Stream implements Iterator {
+    private $pointer;
+    private $pointerIndex;
+
 	public function __construct( $head = null, $tailPromise = null ) {
 		if( $tailPromise === null ) {
 			$tailPromise = function() {
@@ -9,6 +12,30 @@ class Stream {
 		$this->headValue = $head;
 		$this->tailPromise = $tailPromise;
 	}
+
+	/* iterator methods */
+	public function rewind() {
+		$this->pointer = $this;
+		$this->pointerIndex = 0;
+	}
+
+	public function current() {
+		return $this->pointer->head();
+	}
+
+	public function key() {
+		return $this->pointerIndex;
+	}
+
+	public function next() {
+		$this->pointer = $this->pointer->tail();
+		++$this->pointerIndex;
+	}
+
+	public function valid() {
+		return !$this->pointer->blank();
+	}
+	/* end of iterator methods */
 	
 	public function blank() {
 		return ( $this->headValue === null );
