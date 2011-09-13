@@ -1,0 +1,9 @@
+h1. streamphp
+
+a tiny stand-alone library for streams in php (based off of stream.js)
+
+http://www.streamjs.org
+
+h2. Usage
+
+For usage examples, please see examples.php for now.
