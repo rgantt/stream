@@ -6,9 +6,9 @@ echo "\nFirst\n";
 $s = Stream::make( 10, 20, 30 );  
 echo $s->length()."\n";  // outputs 3  
 echo $s->head()."\n";    // outputs 10  
-echo $s->item(0)."\n"; // exactly equivalent to the line above  
-echo $s->item(1)."\n"; // outputs 20  
-echo $s->item(2)."\n"; // outputs 30
+echo $s[0]."\n"; // exactly equivalent to the line above  
+echo $s[1]."\n"; // outputs 20  
+echo $s[2]."\n"; // outputs 30
 
 echo "\nSecond\n";
 

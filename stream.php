@@ -1,5 +1,5 @@
 <?php
-class Stream implements Iterator {
+class Stream implements Iterator, ArrayAccess {
 	private $tailPromise;
 	private $headValue;
 	private $pointer;
@@ -38,6 +38,29 @@ class Stream implements Iterator {
 		return !$this->pointer->blank();
 	}
 	/* end of iterator methods */
+	
+	/* arrayaccess methods */
+	public function offsetGet( $n ) {
+		return $this->item( $n );
+	}
+	
+	public function offsetExists( $n ) {
+		try {
+			$this->item( $n );
+		} catch( Exception $e ) {
+			return false;
+		}
+		return true;
+	}
+	
+	public function offsetSet( $n, $v ) {
+		// how to reconcile with a tailpromise?
+	}
+	
+	public function offsetUnset( $n ) {
+		// do some cleverness with Stream->drop( $n )?
+	}
+	/* end of arrayaccess methods */
 	
 	public function blank() {
 		return ( $this->headValue === null );
