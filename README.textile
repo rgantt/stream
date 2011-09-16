@@ -6,4 +6,4 @@ original implementation based off of the stream data structure introduced in "SI
 
 h2. Usage
 
-For usage examples, please see examples.php for now. The unit tests cover features used in examples.php.
+For usage examples, please see sample/examples.php for now. The unit tests cover features used in sample/examples.php.
