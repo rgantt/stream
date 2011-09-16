@@ -1,4 +1,4 @@
-h1. streamphp
+h1. stream.php
 
 a tiny stand-alone library for streams in php (based off of @dionyziz "stream.js":http://www.streamjs.org)
 
