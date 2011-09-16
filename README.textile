@@ -2,7 +2,7 @@ h1. streamphp
 
 a tiny stand-alone library for streams in php (based off of @dionyziz "stream.js":http://www.streamjs.org)
 
-original implementation based off of the stream data structure introduced in "SICP":http://mitpress.mit.edu/sicp/full-text/book/book-Z-H-24.html#%_sec_3.5 section 3.5.
+original implementation based off of the stream data structure introduced in "SICP":http://mitpress.mit.edu/sicp/full-text/book/book-Z-H-24.html section 3.5.
 
 h2. Usage
 
