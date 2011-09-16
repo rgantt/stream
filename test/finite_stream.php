@@ -29,9 +29,9 @@ class finite_stream_test extends PHPUnit_Framework_TestCase {
 	
 	public function test_array_access_gives_correct_values() {
 		$s = $this->make_static_stream();
-		$this->assertEquals( 10, $s[0] );
-		$this->assertEquals( 20, $s[1] );
-		$this->assertEquals( 30, $s[2] );		
+		$this->assertEquals( 10, $s(0) );
+		$this->assertEquals( 20, $s(1) );
+		$this->assertEquals( 30, $s(2) );		
 	}
 	
 	public function test_car_cdr_behavior() {
