@@ -253,17 +253,15 @@ class Stream implements Iterator, ArrayAccess {
 		});
 	}
 	
-	static
-	
-	public function makeOnes() {
-		return new Stream( 1, self::makeOnes() );
+	public static function makeOnes() {
+		return new Stream( 1, Stream::makeOnes() );
 	}
 	
 	public function makeNaturalNumbers() {
-		return self::makeNaturalNumbers()->add( self::makeOnes() );
+		return Stream::makeNaturalNumbers()->add( Stream::makeOnes() );
 	}
 	
-	public function make() {
+	public static function make() {
 		$args = func_get_args();
 		if( count( $args ) == 0 ) {
 			return new Stream();
@@ -274,12 +272,12 @@ class Stream implements Iterator, ArrayAccess {
 		});
 	}
 	
-	public function range( $low = null, $high = null ) {
+	public static function range( $low = null, $high = null ) {
 		if( $low === null ) {
 			$low = 1;
 		}
 		if( $low == $high ) {
-			return self::make( $low );
+			return Stream::make( $low );
 		}
 		return new Stream( $low, function() use ( $low, $high ) {
 			return Stream::range( $low + 1, $high );
