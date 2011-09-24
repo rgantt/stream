@@ -70,29 +70,23 @@ class Stream implements Iterator {
 	}
 	
 	public function head() {
-		if( $this->blank() ) {
-			throw new Exception('Cannot get the head of the empty stream.');
-		}
+		if( $this->blank() ) throw new Exception('Cannot get the head of the empty stream.');
 		return $this->headValue;
 	}
 	
 	public function tail() {
-		if( $this->blank() ) {
-			throw new Exception('Cannot get the tail of the empty stream.');
-		}
+		if( $this->blank() ) throw new Exception('Cannot get the tail of the empty stream.');
 		// TODO: memoize here
 		$tp = $this->tailPromise;
 		return $tp();
 	}
 	
 	public function item( $n ) {
-		if( $this->blank() ) {
-			throw new Exception('Cannot use item() on an empty stream.');
-		}
+		if( $this->blank() ) throw new Exception('Cannot use item() on an empty stream.');
 		$m = $n;
 		$s = $this;
 		while( $m != 0 ) {
-			--$m;
+			$m -= 1;
 			try {
 				$s = $s->tail();
 			} catch( Exception $e ) {
@@ -109,9 +103,8 @@ class Stream implements Iterator {
 	public function length() {
 		$s = $this;
 		$len = 0;
-		
 		while( !$s->blank() ) {
-			++$len;
+			$len += 1;
 			$s = $s->tail();
 		}
 		return $len;
@@ -124,12 +117,8 @@ class Stream implements Iterator {
 	}
 	
 	public function zip( $f, $s ) {
-		if( $this->blank() ) {
-			return $s;
-		}
-		if( $s->blank() ) {
-			return $this;
-		}
+		if( $this->blank() ) return $s;
+		if( $s->blank() ) return $this;
 		$self = $this;
 		return new Stream( $f( $s->head(), $this->head() ), function() use ( $self, $f, $s ) {
 			return $self->tail()->zip( $f, $s->tail() );
@@ -137,9 +126,7 @@ class Stream implements Iterator {
 	}
 	
 	public function map( $f ) {
-		if( $this->blank() ) {
-			return $this;
-		}
+		if( $this->blank() ) return $this;
 		$self = $this;
 		return new Stream( $f( $this->head() ), function() use ( $self, $f ) {
 			return $self->tail()->map( $f );
@@ -147,9 +134,7 @@ class Stream implements Iterator {
 	}
 	
 	public function reduce( $aggregator, $initial ) {
-		if( $this->blank() ) {
-			return $initial;
-		}
+		if( $this->blank() ) return $initial;
 		return $this->tail()->reduce( $aggregator, $aggregator( $initial, $this->head() ) );
 	}
 	
@@ -180,9 +165,7 @@ class Stream implements Iterator {
 	}
 	
 	public function filter( $f ) {
-		if( $this->blank() ) {
-			return $this;
-		}
+		if( $this->blank() ) return $this;
 		$h = $this->head();
 		$t = $this->tail();
 		if( $f( $h ) ) {
@@ -194,9 +177,7 @@ class Stream implements Iterator {
 	}
 	
 	public function take( $howmany ) {
-		if( $this->blank() ) {
-			return $this;
-		}
+		if( $this->blank() ) return $this;
 		if( $howmany == 0 ) {
 			return new Stream();
 		}
@@ -212,9 +193,7 @@ class Stream implements Iterator {
 	public function drop( $n ) {
 		$self = $this;
 		while( $n-- > 0 ) {
-			if( $self->blank() ) {
-				return new Stream();
-			}
+			if( $self->blank() ) return new Stream();
 			$self = $self->tail();
 		}
 		return new Stream( $self->headValue, $self->tailPromise );
@@ -254,14 +233,6 @@ class Stream implements Iterator {
 				echo $x."\n";
 			}
 		});
-	}
-	
-	public static function makeOnes() {
-		return new Stream( 1, Stream::makeOnes() );
-	}
-	
-	public function makeNaturalNumbers() {
-		return Stream::makeNaturalNumbers()->add( Stream::makeOnes() );
 	}
 	
 	public static function make() {
