@@ -1,9 +1,9 @@
 h1. stream.php
 
-a tiny stand-alone library for streams in php (based off of @dionyziz "stream.js":http://www.streamjs.org)
+A stand-alone library for streams in PHP based off of "stream.js":http://www.streamjs.org.
 
-original implementation based off of the stream data structure introduced in "SICP":http://mitpress.mit.edu/sicp/full-text/book/book-Z-H-24.html section 3.5.
+Original implementation based off of the stream data structure introduced in "SICP":http://mitpress.mit.edu/sicp/full-text/book/book-Z-H-24.html section 3.5.
 
 h2. Usage
 
-For usage examples, please see sample/examples.php for now. The unit tests cover features used in sample/examples.php.
+For a lengthy tutorial on using streams in your own applications (or for any purpose!) please go here: http://ryangantt.com/stream.
