@@ -6,4 +6,4 @@ Original implementation based off of the stream data structure introduced in "SI
 
 h2. Usage
 
-For a more in-depth introduction to the stream datastructure, please "visit the tutorial":http://ryangantt.com/stream.
+For a more in-depth introduction to the stream datastructure, please "visit the tutorial":http://ryangantt.com/stream, which has been adapted to PHP from the well-written introduction by Dionysis.
