@@ -6,4 +6,4 @@ Original implementation based off of the stream data structure introduced in "SI
 
 h2. Usage
 
-For a lengthy tutorial on using streams in your own applications (or for any purpose!) please go here: http://ryangantt.com/stream.
+For a more in-depth introduction to the stream datastructure, please "visit the tutorial":http://ryangantt.com/stream.
