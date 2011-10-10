@@ -211,7 +211,7 @@ class Stream implements Iterator {
 	}
 	
 	public function __toString() {
-		return '[strema head: ' . $this->head() . '; tail: ' . $this->tail() . ']';
+		return '[head: ' . $this->head() . '; tail: ' . $this->tail() . ']';
 	}
 	
 	/**
